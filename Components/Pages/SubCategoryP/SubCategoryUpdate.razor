@@ -1,0 +1,118 @@
+﻿@page "/subcategory/update/{Id}"
+
+@using CoffeeShopAdmin.Models.CategoryM
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.SubCategoryM
+@using CoffeeShopAdmin.Services.CategoryS
+
+@inject CoffeeShopAdmin.Services.SubCategoryS.ISubCategoryService SubCategoryService
+@inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Update SubCategory</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (subcategory == null)
+{
+    <p>SubCategory not found.</p>
+}
+else
+{
+    <EditForm Model="subcategory" OnValidSubmit="UpdateSubCategory">
+        <DataAnnotationsValidator />
+        <div class="card w-50">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Category Name</label>
+                    <InputSelect @bind-Value="subcategory.CategoryId" class="form-select">
+                        <option value="">Select a Category</option>
+                        @if (categories != null)
+                        {
+                            @foreach (var category in categories)
+                            {
+                                <option value="@category.Id">@category.Name</option>
+                            }
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => subcategory.CategoryId)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">SubCategory Name</label>
+                    <InputText @bind-Value="subcategory.Name" class="form-control" />
+                    <ValidationMessage For="@(() => subcategory.Name)" />
+                </div>
+
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public string Id { get; set; } = string.Empty;
+    private SubCategoryRequestModel subcategory = new();
+    private List<CategoryRequestModel> categories = new();
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Load categories and subcategory in parallel
+            var categoryTask = CategoryService.GetCategories();
+            var subcategoryTask = SubCategoryService.GetSubCategoryById(Id);
+
+            await Task.WhenAll(categoryTask, subcategoryTask);
+
+            categories = await categoryTask;
+            subcategory = await subcategoryTask;
+
+            if (subcategory == null)
+            {
+                Console.WriteLine($"SubCategory with ID {Id} not found.");
+                Navigation.NavigateTo("/subcategory");
+                return;
+            }
+
+            isLoading = false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching data: {ex.Message}");
+        }
+    }
+
+    private async Task UpdateSubCategory()
+    {
+        try
+        {
+            var result = await SubCategoryService.UpdateSubCategory(Id, subcategory);
+            if (result)
+            {
+                Navigation.NavigateTo("/subcategory");
+            }
+            else
+            {
+                Console.WriteLine("Error updating subcategory");
+                // Consider showing an error message to the user
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception: {ex.Message}");
+            // Consider showing an error message to the user
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/subcategory");
+    }
+}

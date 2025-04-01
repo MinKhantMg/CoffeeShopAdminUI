@@ -1,0 +1,87 @@
+﻿@page "/subcategory/delete/{Id}"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.SubCategoryM
+
+@inject CoffeeShopAdmin.Services.SubCategoryS.ISubCategoryService SubCategoryService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Delete SubCategory</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (subcategory == null)
+{
+    <p>SubCategory not found.</p>
+}
+else
+{
+    <div class="card w-25">
+        <div class="card-body">
+            <div class="mb-3">
+                <p>Are you sure you want to delete <strong>@subcategory.Name</strong>?</p>
+            </div>
+
+            <button class="btn btn-danger" @onclick="DeleteSubCategory">Delete</button>
+            <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Id { get; set; }
+    private SubCategoryRequestModel? subcategory;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            subcategory = await SubCategoryService.GetSubCategoryById(Id);
+
+            if (subcategory == null)
+            {
+                Console.WriteLine($"SubCategory with ID {Id} not found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching subcategory: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteSubCategory()
+    {
+        try
+        {
+            var result = await SubCategoryService.DeleteSubCategory(Id);
+            if (result)
+            {
+                Navigation.NavigateTo("/subcategory");
+            }
+            else
+            {
+                Console.WriteLine("Error deleting subcategory");
+                // Consider showing an error message to the user
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception: {ex.Message}");
+            // Consider showing an error message to the user
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/subcategory");
+    }
+}

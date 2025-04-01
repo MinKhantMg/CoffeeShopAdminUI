@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CoffeeShopAdmin.bundle.scp.css",
+      "PackagePath": "staticwebassets\\CoffeeShopAdmin.ood4qeml0o.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CoffeeShopAdmin.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CoffeeShopAdmin.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.CoffeeShopAdmin.props",
+      "PackagePath": "build\\CoffeeShopAdmin.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CoffeeShopAdmin.props",
+      "PackagePath": "buildMultiTargeting\\CoffeeShopAdmin.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.CoffeeShopAdmin.props",
+      "PackagePath": "buildTransitive\\CoffeeShopAdmin.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,81 @@
+﻿@page "/category/update/{Id}"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.CategoryM
+
+@inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Update Category</h3>
+
+@if (category == null)
+{
+	<p>Loading...</p>
+}
+else
+{
+	<div class="card w-25">
+		<div class="card-body">
+			<div class="mb-3">
+				<label class="form-label">Category Name</label>
+				<input type="text" class="form-control" value="@category.Name" required />
+			</div>
+
+			<button class="btn btn-success" @onclick="UpdateCategory">Save</button>
+			<button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter] public string Id { get; set; } 
+	private CategoryRequestModel category = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		try
+		{
+			category = await CategoryService.GetCategoryById(Id);
+			if (category == null)
+			{
+				Console.WriteLine("Category not found.");
+				Navigation.NavigateTo("/category");
+			}
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"Error fetching category: {ex.Message}");
+		}
+	}
+
+	private async Task UpdateCategory()
+	{
+		if (!string.IsNullOrWhiteSpace(category.Name))
+		{
+			try
+			{
+				category.Id = Id;
+				var result = await CategoryService.UpdateCategory(category.Id, category);
+				if (result)
+				{
+					Navigation.NavigateTo("/category");
+				}
+				else
+				{
+					Console.WriteLine("Error updating category");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Exception: {ex.Message}");
+			}
+		}
+	}
+
+	private void Cancel()
+	{
+		Navigation.NavigateTo("/category");
+	}
+}

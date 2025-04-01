@@ -1,0 +1,79 @@
+﻿@page "/category/delete/{Id}"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.CategoryM
+
+@inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Delete Category</h3>
+
+@if (category == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="card w-25">
+        <div class="card-body">
+            <div class="mb-3">
+                <p>Are you sure you want to delete @category.Name?</p>
+            </div>
+
+            <button class="btn btn-danger" @onclick="DeleteCategory">Delete</button>
+            <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Id { get; set; } 
+    private CategoryRequestModel? category;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            category = await CategoryService.GetCategoryById(Id);
+            if (category == null)
+            {
+                Console.WriteLine("Category not found.");
+                Navigation.NavigateTo("/category", forceLoad: true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching category: {ex.Message}");
+        }
+    }
+
+    private async Task DeleteCategory()
+    {
+        if (string.IsNullOrWhiteSpace(category.Id))
+        {
+            try
+            {
+                var result = await CategoryService.DeleteCategory(Id);
+                if (result)
+                {
+                    Navigation.NavigateTo("/category");
+                }
+                else
+                {
+                    Console.WriteLine("Error deleting category");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/category", forceLoad: true);
+    }
+}

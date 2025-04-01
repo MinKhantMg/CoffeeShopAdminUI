@@ -1,0 +1,21 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+
+<CascadingAuthenticationState>
+	<AuthorizeView Roles="Admin">
+			<h3>Welcome, Admin Panel</h3>
+			
+			
+	</AuthorizeView>
+	<AuthorizeView Roles="Staff">
+		<h3>Welcome, Staff Panel</h3>
+	
+
+	</AuthorizeView>
+	 <AuthorizeView> 
+		<NotAuthorized> 
+	 		<h1>Welocome To Cafe de lax AdminDashboard</h1> 
+		</NotAuthorized> 
+	 </AuthorizeView> 
+</CascadingAuthenticationState>

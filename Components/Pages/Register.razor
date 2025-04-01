@@ -1,0 +1,80 @@
+﻿@page "/register"
+
+@using System.ComponentModel.DataAnnotations
+@using CoffeeShopAdmin.Auth
+@using CoffeeShopAdmin.Enums
+@using CoffeeShopAdmin.Models.RegisterM
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Blazored.LocalStorage
+
+@inject NavigationManager Navigation
+@inject CoffeeShopAdmin.Services.ApiClient apiClient;
+@inject AuthenticationStateProvider AuthStateProvider;
+@inject ILocalStorageService localStorage;
+@inject CoffeeShopAdmin.Services.UserS.IUserService UserService
+
+<h1>Register</h1>
+<div class="row">
+	<div class="col-md-4">
+		<section>
+			<EditForm Model="registerModel" method="post" OnValidSubmit="RegisterUser" FormName="Register">
+				<DataAnnotationsValidator />
+				<hr />
+				<div class="form-floating mb-3">
+					<InputText @bind-Value="registerModel.Name" class="form-control" aria-required="true" />
+					<label for="name" class="form-label">Name</label>
+					<ValidationMessage For="() => registerModel.Name" class="text-danger" />
+				</div>
+				<div class="form-floating mb-3">
+					<InputText @bind-Value="registerModel.PhoneNumber" class="form-control" aria-required="true" />
+					<label for="phonenumber" class="form-label">PhoneNumber</label>
+					<ValidationMessage For="() => registerModel.PhoneNumber" class="text-danger" />
+				</div>
+				<div class="form-floating mb-3">
+					<InputText @bind-Value="registerModel.Email" class="form-control" aria-required="true" />
+					<label for="email" class="form-label">Email</label>
+					<ValidationMessage For="() => registerModel.Email" class="text-danger" />
+				</div>
+				<div class="form-floating mb-3">
+					<div class="form-floating mb-3">
+						<InputText type="password" @bind-Value="registerModel.PasswordHash" class="form-control" aria-required="true" />
+						<label for="password" class="form-label">Password</label>
+						<ValidationMessage For="() => registerModel.PasswordHash" class="text-danger" />
+					</div>
+				</div>
+				<div class="form-floating mb-3">
+					<InputSelect class="form-select" @bind-Value="registerModel.Role">
+						@foreach (var role in Enum.GetNames(typeof(Role)))
+						{
+							<option value="@role">@role</option>
+						}
+					</InputSelect>
+					<label class="form-label">Role</label>
+					<ValidationMessage For="() => registerModel.Role" class="text-danger" />
+				</div>
+				<div>
+					<button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+				</div>
+			</EditForm>
+		</section>
+	</div>
+</div>
+
+@code {
+	private RegisterRequestModel registerModel = new();
+
+	private async Task RegisterUser()
+	{
+		var result = await UserService.RegisterUserAsync(registerModel);
+		if (result)
+		{
+			Console.WriteLine("User registered successfully!");
+			Navigation.NavigateTo("/login");
+		}
+		else
+		{
+			Console.WriteLine("User registration failed.");
+		}
+	}
+}

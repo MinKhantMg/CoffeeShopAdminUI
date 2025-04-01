@@ -1,0 +1,55 @@
+﻿@page "/category/create"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.CategoryM
+
+@inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Create Category</h3>
+
+<div class="card w-25">
+	<div class="card-body">
+		<div class="mb-3">
+			<label class="form-label">Category Name</label>
+			<input type="text" class="form-control" @bind="category.Name" required />
+		</div>
+
+		<button class="btn btn-success" @onclick="CreateCategory">Save</button>
+		<button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+	</div>
+</div>
+
+@code {
+	private CategoryRequestModel category = new();
+
+	private async Task CreateCategory()
+	{
+		if (!string.IsNullOrWhiteSpace(category.Name))
+		{
+			try
+			{
+				var result = await CategoryService.CreateCategory(category);
+				if (result)
+				{
+					Navigation.NavigateTo("/category");
+				}
+				else
+				{
+					Console.WriteLine("Error creating category");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Exception: {ex.Message}");
+			}
+		}
+	}
+
+	private void Cancel()
+	{
+		Navigation.NavigateTo("/category");
+	}
+}

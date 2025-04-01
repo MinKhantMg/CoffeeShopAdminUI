@@ -1,0 +1,84 @@
+﻿@page "/subcategory/create"
+
+@using CoffeeShopAdmin.Models.CategoryM
+@using CoffeeShopAdmin.Models.SubCategoryM
+@using Microsoft.AspNetCore.Authorization
+
+@inject CoffeeShopAdmin.Services.SubCategoryS.ISubCategoryService SubCategoryService
+@inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Create SubCategory</h3>
+
+<div class="card w-50">
+    <div class="card-body">
+        <EditForm Model="subcategory" OnValidSubmit="CreateSubCategory">
+            <div class="mb-3">
+                <InputSelect class="form-select" @bind-Value="subcategory.CategoryId" required>
+                    <option value="">Select a Category</option>
+                    @foreach (var category in categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="() => subcategory.CategoryId" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">SubCategory Name</label>
+                <InputText class="form-control" @bind-Value="subcategory.Name" required />
+                <ValidationMessage For="() => subcategory.Name" class="text-danger" />
+            </div>
+
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private SubCategoryRequestModel subcategory = new();
+    private List<CategoryRequestModel> categories = new List<CategoryRequestModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            categories = await CategoryService.GetCategories();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching categories: {ex.Message}");
+        }
+    }
+
+    private async Task CreateSubCategory()
+    {
+        if (!string.IsNullOrWhiteSpace(subcategory.Name) && subcategory.CategoryId is not null)
+        {
+            try
+            {
+                var result = await SubCategoryService.CreateSubCategory(subcategory);
+                if (result)
+                {
+                    Navigation.NavigateTo("/subcategory");
+                }
+                else
+                {
+                    Console.WriteLine("Error creating subcategory");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/subcategory");
+    }
+}

@@ -1,0 +1,65 @@
+﻿@page "/login"
+@using System.ComponentModel.DataAnnotations
+@using System.Security.Claims
+@using CoffeeShopAdmin.Models;
+@using CoffeeShopAdmin.Auth;
+@using CoffeeShopAdmin.Models.LoginM
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Blazored.LocalStorage
+
+@inject NavigationManager Navigation
+@inject CoffeeShopAdmin.Services.ApiClient apiClient;
+@inject AuthenticationStateProvider AuthStateProvider;
+@inject ILocalStorageService localStorage;
+
+<h1>Login</h1>
+<div class="row">
+	<div class="col-md-4">
+		<section>
+			<EditForm Model="loginModel" method="post" OnValidSubmit="HandleLogin" FormName="Login">
+				<DataAnnotationsValidator/>
+				<hr />
+				<div class="form-floating mb-3">
+					<InputText @bind-Value="loginModel.Email" class="form-control" aria-required="true" />
+					<label for="email" class="form-label">Email</label>
+					<ValidationMessage For="() => loginModel.Email" class="text-danger" />
+				</div>
+				<div class="form-floating mb-3">
+					<InputText type="password" @bind-Value="loginModel.Password" class="form-control" aria-required="true" />
+					<label for="password" class="form-label">Password</label>
+					<ValidationMessage For="() => loginModel.Password" class="text-danger" />
+				</div>
+				<div>
+					<button type="submit" class="w-100 btn btn-lg btn-primary">Login</button>
+				</div>
+			</EditForm>
+		</section>
+	</div>
+</div>
+
+@code {
+
+	private LoginRequestModel loginModel = new LoginRequestModel();
+
+	private async Task HandleLogin()
+	{
+		var res = await apiClient.PostAsync<LoginResponseModel, LoginRequestModel>("/auth/login", loginModel);
+
+		if (res != null && !string.IsNullOrEmpty(res.RefreshToken))
+		{
+			
+			 await localStorage.SetItemAsync("sessionState", res);
+
+			// await localStorage.SetAsync("accessToken", res.AccessToken);
+			// await localStorage.SetAsync("refreshToken", res.RefreshToken);
+
+			await ((CustomAuthStateProvider)AuthStateProvider).MarkUserAsAuthenticated(res);
+			Navigation.NavigateTo("/");
+		}
+		else
+		{
+			Console.WriteLine($"Login failed: {res?.Message ?? "No response"}");
+		}
+	}
+}
