@@ -1,3 +1,10 @@
+C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.csproj.AssemblyReference.cache
+C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.AssemblyInfoInputs.cache
+C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.AssemblyInfo.cs
+C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.sourcelink.json
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\bin\Debug\net8.0\appsettings.json
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\bin\Debug\net8.0\CoffeeShopAdmin.staticwebassets.runtime.json
@@ -32,12 +39,6 @@ C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\bin\Debug\net8.0\Micr
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\bin\Debug\net8.0\MudBlazor.dll
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.csproj.AssemblyReference.cache
-C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.AssemblyInfoInputs.cache
-C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.AssemblyInfo.cs
-C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.csproj.CoreCompileInputs.cache
-C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\CoffeeShopAdmin.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\scopedcss\Components\Layout\MainLayout.razor.rz.scp.css
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\scopedcss\Components\Layout\NavMenu.razor.rz.scp.css
 C:\Users\PC\Desktop\Cafe\CoffeeShopAdminUI\CoffeeShopAdmin\obj\Debug\net8.0\scopedcss\bundle\CoffeeShopAdmin.styles.css

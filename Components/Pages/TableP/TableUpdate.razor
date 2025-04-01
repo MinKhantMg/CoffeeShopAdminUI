@@ -1,0 +1,90 @@
+﻿@page "/table/update/{Id}"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.TableM
+
+@inject CoffeeShopAdmin.Services.TableS.ITableService TableService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Update Table</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (table == null)
+{
+    <p>Table not found.</p>
+}
+else
+{
+    <EditForm Model="table" OnValidSubmit="UpdateTable">
+        <DataAnnotationsValidator />
+        <div class="card w-25">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">Table Name</label>
+                    <InputText @bind-Value="table.Name" class="form-control" />
+                    <ValidationMessage For="@(() => table.Name)" class="text-danger" />
+                </div>
+
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public string Id { get; set; }
+    private TableRequestModel table = new();
+    private bool isLoading = true;
+    private string errorMessage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            table = await TableService.GetTableById(Id);
+            if (table == null)
+            {
+                errorMessage = "Table not found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error loading table: {ex.Message}";
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task UpdateTable()
+    {
+        try
+        {
+            var result = await TableService.UpdateTable(Id, table);
+            if (result)
+            {
+                Navigation.NavigateTo("/table");
+            }
+            else
+            {
+                errorMessage = "Failed to update table. Please try again.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error updating table: {ex.Message}";
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/table");
+    }
+}

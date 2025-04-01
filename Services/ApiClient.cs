@@ -175,16 +175,13 @@ namespace CoffeeShopAdmin.Services
             return await res.Content.ReadFromJsonAsync<T1>();
         }
 
-        public async Task<bool> UpdateCategory(string id, CategoryRequestModel category)
-        {
-            var result = await PutAsync<ApiResponse, CategoryRequestModel>($"/category/{id}", category);
-            return result?.Result ?? false;
-        }
-
-        //public async Task<T1> UpdateCategory<T1,T2>(string id, T2 category)
+        //public async Task<bool> UpdateCategory(string id, CategoryRequestModel category)
         //{
-        //    return await PutAsync<T1, T2>($"/category/{id}", category);
+        //    var result = await PutAsync<ApiResponse, CategoryRequestModel>($"/category/{id}", category);
+        //    return result?.Result ?? false;
         //}
+
+      
 
         public async Task<ApiResponse> DeleteAsync(string path)
         {

@@ -1,0 +1,118 @@
+﻿@page "/product/update/{Id}"
+
+@using CoffeeShopAdmin.Models.ProductM
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.SubCategoryM
+
+
+@inject CoffeeShopAdmin.Services.SubCategoryS.ISubCategoryService SubCategoryService
+@inject CoffeeShopAdmin.Services.ProductS.IProductService ProductService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Update Product</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (product == null)
+{
+    <p>Product not found.</p>
+}
+else
+{
+    <EditForm Model="product" OnValidSubmit="UpdateProduct">
+        <DataAnnotationsValidator />
+        <div class="card w-25">
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">SubCategory Name</label>
+                    <InputSelect @bind-Value="product.SubCategoryId" class="form-select">
+                        <option value="">Select a SubCategory</option>
+                        @if (SubCategories != null)
+                        {
+                            @foreach (var SubCategory in SubCategories)
+                            {
+                                <option value="@SubCategory.Id">@SubCategory.Name</option>
+                            }
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => product.SubCategoryId)" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Product Name</label>
+                    <InputText @bind-Value="product.Name" class="form-control" />
+                    <ValidationMessage For="@(() => product.Name)" />
+                </div>
+
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+            </div>
+        </div>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public string Id { get; set; } = string.Empty;
+    private ProductRequestModel product = new();
+    private List<SubCategoryRequestModel> SubCategories = new();
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Load categories and subcategory in parallel
+            var productTask = ProductService.GetProductById(Id);
+            var subcategoryTask = SubCategoryService.GetSubCategories();
+
+            await Task.WhenAll(subcategoryTask, productTask);
+
+            product = await productTask;
+            SubCategories = await subcategoryTask;
+
+            if (product == null)
+            {
+               // Console.WriteLine($"SubCategory with ID {Id} not found.");
+                Navigation.NavigateTo("/product");
+                return;
+            }
+
+            isLoading = false;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching data: {ex.Message}");
+        }
+    }
+
+    private async Task UpdateProduct()
+    {
+        try
+        {
+            var result = await ProductService.UpdateProduct(Id, product);
+            if (result)
+            {
+                Navigation.NavigateTo("/product");
+            }
+            else
+            {
+                Console.WriteLine("Error updating product");
+                // Consider showing an error message to the user
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception: {ex.Message}");
+            // Consider showing an error message to the user
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/product");
+    }
+}

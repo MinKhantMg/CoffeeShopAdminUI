@@ -40,13 +40,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\CoffeeShopAdmin.ood4qeml0o.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-SBAZuEnzfFpG2MumVT/NpXiwT6GNdv1sAbpQtLnJEmA="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5913"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022SBAZuEnzfFpG2MumVT/NpXiwT6GNdv1sAbpQtLnJEmA=\u0022"},{"Name":"Last-Modified","Value":"Mon, 31 Mar 2025 20:13:46 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"5913"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022SBAZuEnzfFpG2MumVT/NpXiwT6GNdv1sAbpQtLnJEmA=\u0022"},{"Name":"Last-Modified","Value":"Tue, 01 Apr 2025 17:17:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/CoffeeShopAdmin/CoffeeShopAdmin.ood4qeml0o.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\CoffeeShopAdmin.ood4qeml0o.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"ood4qeml0o"},{"Name":"integrity","Value":"sha256-SBAZuEnzfFpG2MumVT/NpXiwT6GNdv1sAbpQtLnJEmA="},{"Name":"label","Value":"_content/CoffeeShopAdmin/CoffeeShopAdmin.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5913"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022SBAZuEnzfFpG2MumVT/NpXiwT6GNdv1sAbpQtLnJEmA=\u0022"},{"Name":"Last-Modified","Value":"Mon, 31 Mar 2025 20:13:46 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"5913"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022SBAZuEnzfFpG2MumVT/NpXiwT6GNdv1sAbpQtLnJEmA=\u0022"},{"Name":"Last-Modified","Value":"Tue, 01 Apr 2025 17:17:07 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/CoffeeShopAdmin/favicon.ifv42okdf2.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.png'))</AssetFile>

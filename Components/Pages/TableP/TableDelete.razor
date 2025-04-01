@@ -1,0 +1,79 @@
+﻿@page "/table/delete/{Id}"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.TableM
+
+@inject CoffeeShopAdmin.Services.TableS.ITableService TableService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Delete Table</h3>
+
+@if (table == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="card w-25">
+        <div class="card-body">
+            <div class="mb-3">
+                <p>Are you sure you want to delete @table.Name?</p>
+            </div>
+
+            <button class="btn btn-danger" @onclick="DeleteTable">Delete</button>
+            <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Id { get; set; }
+    private TableRequestModel? table;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            table = await TableService.GetTableById(Id);
+            if (table == null)
+            {
+                Console.WriteLine("Table not found.");
+                Navigation.NavigateTo("/table", forceLoad: true);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching table: {ex.Message}");
+        }
+    }
+
+    private async Task DeleteTable()
+    {
+        if (string.IsNullOrWhiteSpace(table.Id))
+        {
+            try
+            {
+                var result = await TableService.DeleteTable(Id);
+                if (result)
+                {
+                    Navigation.NavigateTo("/table");
+                }
+                else
+                {
+                    Console.WriteLine("Error deleting table");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/table", forceLoad: true);
+    }
+}

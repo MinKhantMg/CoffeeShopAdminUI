@@ -56,8 +56,7 @@ else
 		{
 			try
 			{
-				category.Id = Id;
-				var result = await CategoryService.UpdateCategory(category.Id, category);
+				var result = await CategoryService.UpdateCategory(Id, category);
 				if (result)
 				{
 					Navigation.NavigateTo("/category");

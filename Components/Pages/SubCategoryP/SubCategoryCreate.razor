@@ -12,10 +12,11 @@
 
 <h3>Create SubCategory</h3>
 
-<div class="card w-50">
+<div class="card w-25">
     <div class="card-body">
         <EditForm Model="subcategory" OnValidSubmit="CreateSubCategory">
             <div class="mb-3">
+                <label class="form-label">Category Name</label>
                 <InputSelect class="form-select" @bind-Value="subcategory.CategoryId" required>
                     <option value="">Select a Category</option>
                     @foreach (var category in categories)

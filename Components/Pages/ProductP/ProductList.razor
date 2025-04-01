@@ -1,0 +1,136 @@
+﻿@page "/product"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.SubCategoryM
+@using CoffeeShopAdmin.Models.ProductM
+
+@inject CoffeeShopAdmin.Services.SubCategoryS.ISubCategoryService SubCategoryService
+@inject CoffeeShopAdmin.Services.ProductS.IProductService ProductService
+
+@attribute [Authorize]
+
+<PageTitle>Product List</PageTitle>
+<h1>Product</h1>
+<NavLink href="/product/create" class="btn btn-success mb-2">New</NavLink>
+
+@if (products is not null)
+{
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">SubCategory</th>
+                <th scope="col">Name</th>
+                <th scope="col">CreatedBy</th>
+                <th scope="col">CreatedOn</th>
+                <th scope="col">LastModifiedBy</th>
+                <th scope="col">LastModifiedOn</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in pagedProducts)
+            {
+                <tr class="table-row">
+                    <td>
+                        <NavLink href="@($"/product/update/{item.Id}")" class="btn btn-primary">Edit</NavLink>
+                        <NavLink href="@($"/product/delete/{item.Id}")" class="btn btn-danger">Delete</NavLink>
+                    </td>
+                    <td>@GetSubCategoryName(item.SubCategoryId)</td>
+                    <td>@item.Name</td>
+                    <td>@item.CreatedBy</td>
+                    <td>@item.CreatedOn</td>
+                    <td>@item.LastModifiedBy</td>
+                    <td>@item.LastModifiedOn</td>
+                </tr>
+            }
+
+            <!-- Fill empty rows if less than 5 items are present -->
+            @for (int i = pagedProducts.Count; i < pageSize; i++)
+            {
+                <tr class="table-row">
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between mt-2">
+        <button class="btn btn-secondary" @onclick="PrevPage" disabled="@(!HasPreviousPage)">Previous</button>
+        <span>Page @(pageNumber + 1) of @TotalPages</span>
+        <button class="btn btn-secondary" @onclick="NextPage" disabled="@(!HasNextPage)">Next</button>
+    </div>
+
+    <style>
+        .table-row {
+            height: 50px;
+        }
+    </style>
+}
+
+@code {
+    private int pageSize = 5;
+    private int pageNumber = 0;
+
+    private List<ProductRequestModel> products = new();
+    private List<ProductRequestModel> pagedProducts = new();
+    private Dictionary<string, string> subCategoryNames = new();
+
+    private int TotalPages => (int)Math.Ceiling((double)products.Count / pageSize);
+    private bool HasPreviousPage => pageNumber > 0;
+    private bool HasNextPage => pageNumber < (TotalPages - 1);
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCategories();
+    }
+
+    private async Task LoadCategories()
+    {
+        products = await ProductService.GetProducts();
+
+        // Fetch all categories
+        var subCategories = await SubCategoryService.GetSubCategories();
+
+        // Populate dictionary for quick lookup, using string keys
+        subCategoryNames = subCategories.ToDictionary(c => c.Id, c => c.Name);
+
+        UpdatePagedProducts();
+    }
+
+    private void UpdatePagedProducts()
+    {
+        pagedProducts = products
+            .Skip(pageNumber * pageSize)
+            .Take(pageSize)
+            .ToList();
+    }
+
+    private string GetSubCategoryName(string subCategoryId) // Accepts string now
+    {
+        return subCategoryNames.TryGetValue(subCategoryId, out var name) ? name : "Unknown";
+    }
+
+    private void NextPage()
+    {
+        if (HasNextPage)
+        {
+            pageNumber++;
+            UpdatePagedProducts();
+        }
+    }
+
+    private void PrevPage()
+    {
+        if (HasPreviousPage)
+        {
+            pageNumber--;
+            UpdatePagedProducts();
+        }
+    }
+}

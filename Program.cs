@@ -3,14 +3,14 @@ using CoffeeShopAdmin.Components;
 using CoffeeShopAdmin.Services.CategoryS;
 using CoffeeShopAdmin.Services;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Blazored.LocalStorage;
 using CoffeeShopAdmin.Services.UserS;
 using CoffeeShopAdmin.Services.SubCategoryS;
+using CoffeeShopAdmin.Services.TableS;
+using CoffeeShopAdmin.Services.ProductS;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,8 +44,10 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>
 builder.Services.AddOutputCache();
 builder.Services.AddScoped<ApiService>();
 
+builder.Services.AddScoped<ITableService, TableService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 //builder.Services.AddAuthenticationCore();

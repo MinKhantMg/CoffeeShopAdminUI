@@ -3,7 +3,6 @@
 @using CoffeeShopAdmin.Models.CategoryM
 @using Microsoft.AspNetCore.Authorization
 @using CoffeeShopAdmin.Models.SubCategoryM
-@using CoffeeShopAdmin.Services.CategoryS
 
 @inject CoffeeShopAdmin.Services.SubCategoryS.ISubCategoryService SubCategoryService
 @inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
@@ -25,7 +24,7 @@ else
 {
     <EditForm Model="subcategory" OnValidSubmit="UpdateSubCategory">
         <DataAnnotationsValidator />
-        <div class="card w-50">
+        <div class="card w-25">
             <div class="card-body">
                 <div class="mb-3">
                     <label class="form-label">Category Name</label>

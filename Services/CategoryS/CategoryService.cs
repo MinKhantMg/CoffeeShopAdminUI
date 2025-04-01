@@ -3,7 +3,9 @@ using System.Security.Claims;
 using System.Text.Json;
 using CoffeeShopAdmin.Models;
 using CoffeeShopAdmin.Models.CategoryM;
+using CoffeeShopAdmin.Models.TableM;
 using Microsoft.AspNetCore.Components.Authorization;
+using static MudBlazor.CategoryTypes;
 
 namespace CoffeeShopAdmin.Services.CategoryS
 {
@@ -75,7 +77,9 @@ namespace CoffeeShopAdmin.Services.CategoryS
             }
             category.LastModifiedBy = user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "Admin";
             category.LastModifiedOn = DateTime.UtcNow;
-            return await _apiClient.UpdateCategory(id, category);
+           
+            var result = await _apiClient.PutAsync<ApiResponse, CategoryRequestModel>($"/category/{id}", category);
+            return result?.Result ?? false;
         }
 
         public async Task<bool> DeleteCategory(string id)

@@ -1,0 +1,85 @@
+﻿@page "/product/create"
+
+@using CoffeeShopAdmin.Models.ProductM
+@using CoffeeShopAdmin.Models.SubCategoryM
+@using Microsoft.AspNetCore.Authorization
+
+@inject CoffeeShopAdmin.Services.SubCategoryS.ISubCategoryService SubCategoryService
+@inject CoffeeShopAdmin.Services.ProductS.IProductService ProductService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Create SubCategory</h3>
+
+<div class="card w-25">
+    <div class="card-body">
+        <EditForm Model="product" OnValidSubmit="CreateProduct">
+            <div class="mb-3">
+                <label class="form-label">SubCategory Name</label>
+                <InputSelect class="form-select" @bind-Value="product.SubCategoryId" required>
+                    <option value="">Select a SubCategory</option>
+                    @foreach (var SubCategory in SubCategories)
+                    {
+                        <option value="@SubCategory.Id">@SubCategory.Name</option>
+                    }
+                </InputSelect>
+                <ValidationMessage For="() => product.SubCategoryId" class="text-danger" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Product Name</label>
+                <InputText class="form-control" @bind-Value="product.Name" required />
+                <ValidationMessage For="() => product.Name" class="text-danger" />
+            </div>
+
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private ProductRequestModel product = new();
+    private List<SubCategoryRequestModel> SubCategories = new List<SubCategoryRequestModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            SubCategories = await SubCategoryService.GetSubCategories();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching subcategories: {ex.Message}");
+        }
+    }
+
+    private async Task CreateProduct()
+    {
+        if (!string.IsNullOrWhiteSpace(product.Name) && product.SubCategoryId is not null)
+        {
+            try
+            {
+                var result = await ProductService.CreateProduct(product);
+                if (result)
+                {
+                    Navigation.NavigateTo("/product");
+                }
+                else
+                {
+                    Console.WriteLine("Error creating product");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/product");
+    }
+}

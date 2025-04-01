@@ -1,0 +1,87 @@
+﻿@page "/product/delete/{Id}"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.ProductM
+
+@inject CoffeeShopAdmin.Services.ProductS.IProductService ProductService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Delete Product</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (product == null)
+{
+    <p>Product not found.</p>
+}
+else
+{
+    <div class="card w-25">
+        <div class="card-body">
+            <div class="mb-3">
+                <p>Are you sure you want to delete <strong>@product.Name</strong>?</p>
+            </div>
+
+            <button class="btn btn-danger" @onclick="DeleteProduct">Delete</button>
+            <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Id { get; set; }
+    private ProductRequestModel? product;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            product = await ProductService.GetProductById(Id);
+
+            if (product == null)
+            {
+                Console.WriteLine($"Product with ID {Id} not found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching product: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteProduct()
+    {
+        try
+        {
+            var result = await ProductService.DeleteProduct(Id);
+            if (result)
+            {
+                Navigation.NavigateTo("/product");
+            }
+            else
+            {
+                Console.WriteLine("Error deleting product");
+                // Consider showing an error message to the user
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception: {ex.Message}");
+            // Consider showing an error message to the user
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/product");
+    }
+}
