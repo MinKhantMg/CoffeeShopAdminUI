@@ -20,10 +20,17 @@ else if (product == null)
 }
 else
 {
+    @if (showSuccessMessage)
+    {
+        <div class="alert alert-success mt-3">
+            Product deleted successfully!
+        </div>
+    }
+
     <div class="card w-25">
         <div class="card-body">
             <div class="mb-3">
-                <p>Are you sure you want to delete <strong>@product.Name</strong>?</p>
+                <p>Are you sure you want to delete @product.Name?</p>
             </div>
 
             <button class="btn btn-danger" @onclick="DeleteProduct">Delete</button>
@@ -36,6 +43,7 @@ else
     [Parameter] public string Id { get; set; }
     private ProductRequestModel? product;
     private bool isLoading = true;
+    private bool showSuccessMessage = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -65,18 +73,19 @@ else
             var result = await ProductService.DeleteProduct(Id);
             if (result)
             {
+                showSuccessMessage = true;
+                StateHasChanged();
+                await Task.Delay(1000);
                 Navigation.NavigateTo("/product");
             }
             else
             {
                 Console.WriteLine("Error deleting product");
-                // Consider showing an error message to the user
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Exception: {ex.Message}");
-            // Consider showing an error message to the user
         }
     }
 

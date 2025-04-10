@@ -1,21 +1,87 @@
 ﻿@page "/"
+@using CoffeeShopAdmin.Models.CategoryM
 @using Microsoft.AspNetCore.Authorization
 @using System.Security.Claims
 
-<CascadingAuthenticationState>
-	<AuthorizeView Roles="Admin">
-			<h3>Welcome, Admin Panel</h3>
-			
-			
-	</AuthorizeView>
-	<AuthorizeView Roles="Staff">
-		<h3>Welcome, Staff Panel</h3>
-	
+@inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
 
-	</AuthorizeView>
-	 <AuthorizeView> 
-		<NotAuthorized> 
-	 		<h1>Welocome To Cafe de lax AdminDashboard</h1> 
-		</NotAuthorized> 
-	 </AuthorizeView> 
+<CascadingAuthenticationState>
+    <AuthorizeView Roles="Admin">
+        <h1 class="mb-3">Dashboard</h1>
+        <hr />
+        @if (summary == null)
+        {
+            <p>Loading...</p>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card text-white bg-primary mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Categories</h5>
+                            <p class="card-text display-4">@summary.Categories</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Subcategories</h5>
+                            <p class="card-text display-4">@summary.Subcategories</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-white bg-warning mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Products</h5>
+                            <p class="card-text display-4">@summary.Products</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Product Variants</h5>
+                            <p class="card-text display-4">@summary.ProductVariants</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </AuthorizeView>
+    <AuthorizeView Roles="Staff">
+        <h3>Welcome, Staff Panel</h3>
+
+
+    </AuthorizeView>
+    @* <AuthorizeView>  *@
+    @*     <NotAuthorized>  *@
+    @*         <h1>Welocome To Cafe de lax AdminDashboard</h1>  *@
+    @*     </NotAuthorized>  *@
+    @* </AuthorizeView>  *@
 </CascadingAuthenticationState>
+
+@code {
+    private AdminSummaryModel summary;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        await LoadCategories();
+
+    }
+
+    private async Task LoadCategories()
+    {
+        var categoryresponse = await CategoryService.GetSummary();
+        summary = categoryresponse;
+
+      
+    }
+}

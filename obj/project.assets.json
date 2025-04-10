@@ -385,7 +385,7 @@
           }
         }
       },
-      "MudBlazor/8.3.0": {
+      "MudBlazor/8.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Components": "8.0.12",
@@ -1059,10 +1059,10 @@
         "microsoft.jsinterop.nuspec"
       ]
     },
-    "MudBlazor/8.3.0": {
-      "sha512": "DLc1aK8AgSas82AERWLLefWKadIF7HhYhvgO8Y7jYLZe5v1r4v3rX9pzrzTsQkuPGe6y65tob73kM6gael+WdQ==",
+    "MudBlazor/8.5.1": {
+      "sha512": "xzGhtY60e1fvvyI7rJSYYV0UEkvY8niKuTaqby19cb8rELd29EpPU439RVL8KjVSMy473BEcpgYWBRAoDPGl8A==",
       "type": "package",
-      "path": "mudblazor/8.3.0",
+      "path": "mudblazor/8.5.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1080,7 +1080,7 @@
         "lib/net8.0/MudBlazor.xml",
         "lib/net9.0/MudBlazor.dll",
         "lib/net9.0/MudBlazor.xml",
-        "mudblazor.8.3.0.nupkg.sha512",
+        "mudblazor.8.5.1.nupkg.sha512",
         "mudblazor.nuspec",
         "staticwebassets/MudBlazor.min.css",
         "staticwebassets/MudBlazor.min.js"
@@ -1175,7 +1175,7 @@
       "BCrypt.Net-Next >= 4.0.3",
       "Blazored.LocalStorage >= 4.5.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.14",
-      "MudBlazor >= 8.3.0",
+      "MudBlazor >= 8.5.1",
       "Newtonsoft.Json >= 13.0.3",
       "System.IdentityModel.Tokens.Jwt >= 8.7.0"
     ]
@@ -1244,7 +1244,7 @@
           },
           "MudBlazor": {
             "target": "Package",
-            "version": "[8.3.0, )"
+            "version": "[8.5.1, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

@@ -10,27 +10,35 @@
 
 @attribute [Authorize]
 
-<h3>Create SubCategory</h3>
+<h3>Create Product</h3>
+
+@if (showSuccessMessage)
+{
+    <div class="alert alert-success mt-3">
+        Product created successfully!
+    </div>
+}
 
 <div class="card w-25">
     <div class="card-body">
         <EditForm Model="product" OnValidSubmit="CreateProduct">
+            <DataAnnotationsValidator />
             <div class="mb-3">
                 <label class="form-label">SubCategory Name</label>
-                <InputSelect class="form-select" @bind-Value="product.SubCategoryId" required>
+                <InputSelect class="form-select" @bind-Value="product.SubCategoryId">
                     <option value="">Select a SubCategory</option>
                     @foreach (var SubCategory in SubCategories)
                     {
                         <option value="@SubCategory.Id">@SubCategory.Name</option>
                     }
                 </InputSelect>
-                <ValidationMessage For="() => product.SubCategoryId" class="text-danger" />
+               <ValidationMessage For="() => product.SubCategoryId" />
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Product Name</label>
-                <InputText class="form-control" @bind-Value="product.Name" required />
-                <ValidationMessage For="() => product.Name" class="text-danger" />
+                <InputText class="form-control" @bind-Value="product.Name" />
+               <ValidationMessage For="() => product.Name" />
             </div>
 
             <button class="btn btn-success" type="submit">Save</button>
@@ -42,6 +50,7 @@
 @code {
     private ProductRequestModel product = new();
     private List<SubCategoryRequestModel> SubCategories = new List<SubCategoryRequestModel>();
+    private bool showSuccessMessage = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -64,6 +73,9 @@
                 var result = await ProductService.CreateProduct(product);
                 if (result)
                 {
+                    showSuccessMessage = true;
+                    StateHasChanged();
+                    await Task.Delay(1000);
                     Navigation.NavigateTo("/product");
                 }
                 else

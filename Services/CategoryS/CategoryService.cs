@@ -27,6 +27,12 @@ namespace CoffeeShopAdmin.Services.CategoryS
             return response?.Category ?? new List<CategoryRequestModel>();
         }
 
+        public async Task<AdminSummaryModel> GetSummary()
+        {
+            var response = await _apiClient.GetFromJsonAsync<AdminSummaryModel>("/category/summary");
+            return response ?? new AdminSummaryModel();
+        }
+
         public async Task<CategoryRequestModel> GetCategoryById(string id)
         {
             try
@@ -59,6 +65,11 @@ namespace CoffeeShopAdmin.Services.CategoryS
                 Console.WriteLine("User is not authenticated");
                 return false;
             }
+            if (string.IsNullOrWhiteSpace(category.Name))
+            {
+                Console.WriteLine("Category name cannot be empty");
+                return false;
+            }
             category.Id = Guid.NewGuid().ToString().ToUpper();
             category.CreatedBy = user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "Admin";
             var result = await _apiClient.PostAsync<ApiResponse, CategoryRequestModel>("/category", category);
@@ -75,9 +86,14 @@ namespace CoffeeShopAdmin.Services.CategoryS
                 Console.WriteLine("User is not authenticated");
                 return false;
             }
+            if (string.IsNullOrWhiteSpace(category.Name))
+            {
+                Console.WriteLine("Category name cannot be empty");
+                return false;
+            }
             category.LastModifiedBy = user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "Admin";
             category.LastModifiedOn = DateTime.UtcNow;
-           
+
             var result = await _apiClient.PutAsync<ApiResponse, CategoryRequestModel>($"/category/{id}", category);
             return result?.Result ?? false;
         }

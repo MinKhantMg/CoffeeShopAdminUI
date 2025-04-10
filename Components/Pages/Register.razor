@@ -21,6 +21,12 @@
 			<EditForm Model="registerModel" method="post" OnValidSubmit="RegisterUser" FormName="Register">
 				<DataAnnotationsValidator />
 				<hr />
+				@if (showSuccessMessage)
+				{
+					<div class="alert alert-success mt-3">
+						Register created successfully!
+					</div>
+				}
 				<div class="form-floating mb-3">
 					<InputText @bind-Value="registerModel.Name" class="form-control" aria-required="true" />
 					<label for="name" class="form-label">Name</label>
@@ -63,13 +69,16 @@
 
 @code {
 	private RegisterRequestModel registerModel = new();
+	private bool showSuccessMessage = false;
 
 	private async Task RegisterUser()
 	{
 		var result = await UserService.RegisterUserAsync(registerModel);
 		if (result)
 		{
-			Console.WriteLine("User registered successfully!");
+			showSuccessMessage = true;
+			StateHasChanged();
+			await Task.Delay(1000);
 			Navigation.NavigateTo("/login");
 		}
 		else

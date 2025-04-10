@@ -10,8 +10,9 @@
 @attribute [Authorize]
 
 <PageTitle>SubCategory List</PageTitle>
-<h1>SubCategory</h1>
-<NavLink href="/subcategory/create" class="btn btn-success mb-2">New</NavLink>
+<h1>SubCategories</h1>
+<hr />
+<NavLink href="/subcategory/create" class="btn btn-success mb-4">New</NavLink>
 
 @if (subcategories is not null)
 {
@@ -38,9 +39,9 @@
                     <td>@GetCategoryName(item.CategoryId)</td>
                     <td>@item.Name</td>
                     <td>@item.CreatedBy</td>
-                    <td>@item.CreatedOn</td>
+                    <td>@item.CreatedOn?.ToString("dd/MM/yyyy")</td>
                     <td>@item.LastModifiedBy</td>
-                    <td>@item.LastModifiedOn</td>
+                    <td>@item.LastModifiedOn?.ToString("dd/MM/yyyy")</td>
                 </tr>
             }
 

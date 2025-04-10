@@ -14,7 +14,6 @@ using CoffeeShopAdmin.Services.ProductS;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
@@ -42,7 +41,6 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 builder.Services.AddOutputCache();
-builder.Services.AddScoped<ApiService>();
 
 builder.Services.AddScoped<ITableService, TableService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -50,28 +48,23 @@ builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-//builder.Services.AddAuthenticationCore();
 builder.Services.AddCascadingAuthenticationState();
 
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<ApiClient>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:7035/"); // Correct protocol
+    client.BaseAddress = new Uri("https://localhost:7035/"); 
 });
 
-// Add localization services
 builder.Services.AddLocalization();
 builder.Services.AddControllers();
-//builder.Services.AddProtectedBrowserStorage(); // Required for JWT storage
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

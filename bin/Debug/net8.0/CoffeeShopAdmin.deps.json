@@ -11,7 +11,7 @@
           "BCrypt.Net-Next": "4.0.3",
           "Blazored.LocalStorage": "4.5.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.14",
-          "MudBlazor": "8.3.0",
+          "MudBlazor": "8.5.1",
           "Newtonsoft.Json": "13.0.3",
           "System.IdentityModel.Tokens.Jwt": "8.7.0"
         },
@@ -258,7 +258,7 @@
           }
         }
       },
-      "MudBlazor/8.3.0": {
+      "MudBlazor/8.5.1": {
         "dependencies": {
           "Microsoft.AspNetCore.Components": "8.0.12",
           "Microsoft.AspNetCore.Components.Web": "8.0.12",
@@ -266,8 +266,8 @@
         },
         "runtime": {
           "lib/net8.0/MudBlazor.dll": {
-            "assemblyVersion": "8.3.0.0",
-            "fileVersion": "8.3.0.0"
+            "assemblyVersion": "8.5.1.0",
+            "fileVersion": "8.5.1.0"
           }
         }
       },
@@ -468,12 +468,12 @@
       "path": "microsoft.jsinterop/8.0.12",
       "hashPath": "microsoft.jsinterop.8.0.12.nupkg.sha512"
     },
-    "MudBlazor/8.3.0": {
+    "MudBlazor/8.5.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-DLc1aK8AgSas82AERWLLefWKadIF7HhYhvgO8Y7jYLZe5v1r4v3rX9pzrzTsQkuPGe6y65tob73kM6gael+WdQ==",
-      "path": "mudblazor/8.3.0",
-      "hashPath": "mudblazor.8.3.0.nupkg.sha512"
+      "sha512": "sha512-xzGhtY60e1fvvyI7rJSYYV0UEkvY8niKuTaqby19cb8rELd29EpPU439RVL8KjVSMy473BEcpgYWBRAoDPGl8A==",
+      "path": "mudblazor/8.5.1",
+      "hashPath": "mudblazor.8.5.1.nupkg.sha512"
     },
     "Newtonsoft.Json/13.0.3": {
       "type": "package",

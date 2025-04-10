@@ -15,7 +15,6 @@ namespace CoffeeShopAdmin.Services
     public class ApiClient
     {
         private readonly HttpClient _httpClient;
-       // private readonly ProtectedLocalStorage _localStorage;
         private readonly NavigationManager _navigationManager;
         private readonly AuthenticationStateProvider _authStateProvider;
         private readonly ILocalStorageService _localStorageService;
@@ -39,10 +38,10 @@ namespace CoffeeShopAdmin.Services
                 return;
             }
 
-            Console.WriteLine($"[DEBUG] Token found: {sessionState.AccessToken.Substring(0, 10)}..."); // Print part of the token
+            Console.WriteLine($"[DEBUG] Token found: {sessionState.AccessToken.Substring(0, 10)}..."); 
 
             var identity = GetClaimsIdentity(sessionState.AccessToken);
-            var tokenExpiredClaim = identity.FindFirst("exp");  // Use standard 'exp' claim
+            var tokenExpiredClaim = identity.FindFirst("exp");  
 
             if (tokenExpiredClaim != null && long.TryParse(tokenExpiredClaim.Value, out long tokenExpiry))
             {
@@ -82,7 +81,7 @@ namespace CoffeeShopAdmin.Services
             }
         }
 
-        // This method will extract claims from the JWT token
+       
         private ClaimsIdentity GetClaimsIdentity(string token)
         {
             if (string.IsNullOrEmpty(token))
@@ -94,13 +93,13 @@ namespace CoffeeShopAdmin.Services
             var jwtToken = handler.ReadJwtToken(token);
             var claims = jwtToken.Claims.ToList();
 
-            // Extract username from claims (support different claim types)
+    
             var nameClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value
                          ?? claims.FirstOrDefault(c => c.Type == "name")?.Value;
 
             if (!string.IsNullOrEmpty(nameClaim))
             {
-                claims.Add(new Claim(ClaimTypes.Name, nameClaim)); // Ensure it is present
+                claims.Add(new Claim(ClaimTypes.Name, nameClaim)); 
             }
 
             return new ClaimsIdentity(claims, "jwt");
@@ -111,7 +110,7 @@ namespace CoffeeShopAdmin.Services
 
             await SetAuthorizeHeader();
 
-            // Log headers
+      
             Console.WriteLine("[DEBUG] Sending request with headers:");
             foreach (var header in _httpClient.DefaultRequestHeaders)
             {
@@ -137,21 +136,45 @@ namespace CoffeeShopAdmin.Services
 
         public async Task<T> GetFromJsonAsync<T>(string path)
         {
-            await SetAuthorizeHeader();
-            return await _httpClient.GetFromJsonAsync<T>(path);
+            var sessionState = await _localStorageService.GetItemAsync<LoginResponseModel>("sessionState");
+            if (sessionState == null || string.IsNullOrWhiteSpace(sessionState.AccessToken))
+            {
+                Console.WriteLine("[ERROR] Token missing, redirecting to login.");
+                _navigationManager.NavigateTo("/login");
+                return default;
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Get, path);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", sessionState.AccessToken);
+
+            var response = await _httpClient.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<T>();
         }
+
 
         public async Task<T> GetByIdAsync<T>(string path, string id)
         {
+            T rtn = default;
             await SetAuthorizeHeader();
-            return await _httpClient.GetFromJsonAsync<T>($"{path}/{id}");
+            try
+            {
+               rtn   =  await _httpClient.GetFromJsonAsync<T>($"{path}/{id}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+            return rtn;
         }
 
         public async Task<T1> PutAsync<T1, T2>(string path, T2 putModel)
         {
             await SetAuthorizeHeader();
 
-            // Log headers
+    
             Console.WriteLine("[DEBUG] Sending request with headers:");
             foreach (var header in _httpClient.DefaultRequestHeaders)
             {
@@ -175,14 +198,7 @@ namespace CoffeeShopAdmin.Services
             return await res.Content.ReadFromJsonAsync<T1>();
         }
 
-        //public async Task<bool> UpdateCategory(string id, CategoryRequestModel category)
-        //{
-        //    var result = await PutAsync<ApiResponse, CategoryRequestModel>($"/category/{id}", category);
-        //    return result?.Result ?? false;
-        //}
-
-      
-
+    
         public async Task<ApiResponse> DeleteAsync(string path)
         {
             await SetAuthorizeHeader();

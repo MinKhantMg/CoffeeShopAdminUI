@@ -16,7 +16,14 @@
 }
 else
 {
-    <div class="card w-25">
+    @if (showSuccessMessage)
+    {
+        <div class="alert alert-success mt-3">
+            Category deleted successfully!
+        </div>
+    }
+
+    <div class="card" style="width: 400px">
         <div class="card-body">
             <div class="mb-3">
                 <p>Are you sure you want to delete @category.Name?</p>
@@ -29,17 +36,19 @@ else
 }
 
 @code {
-    [Parameter] public string Id { get; set; } 
+    [Parameter] public string Id { get; set; }
     private CategoryRequestModel? category;
+    private bool showSuccessMessage = false;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
+ 
             category = await CategoryService.GetCategoryById(Id);
             if (category == null)
             {
-                Console.WriteLine("Category not found.");
+      
                 Navigation.NavigateTo("/category", forceLoad: true);
             }
         }
@@ -51,14 +60,18 @@ else
 
     private async Task DeleteCategory()
     {
-        if (string.IsNullOrWhiteSpace(category.Id))
+        if (category != null && !string.IsNullOrWhiteSpace(category.Id))
         {
             try
             {
+       
                 var result = await CategoryService.DeleteCategory(Id);
                 if (result)
                 {
-                    Navigation.NavigateTo("/category");
+                    showSuccessMessage = true;
+                    StateHasChanged();  
+                    await Task.Delay(1000);  
+                    Navigation.NavigateTo("/category");  
                 }
                 else
                 {
@@ -74,6 +87,6 @@ else
 
     private void Cancel()
     {
-        Navigation.NavigateTo("/category", forceLoad: true);
+        Navigation.NavigateTo("/category");  
     }
 }

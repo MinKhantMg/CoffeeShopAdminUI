@@ -10,46 +10,61 @@
 
 <h3>Create Category</h3>
 
-<div class="card w-25">
-	<div class="card-body">
-		<div class="mb-3">
-			<label class="form-label">Category Name</label>
-			<input type="text" class="form-control" @bind="category.Name" required />
-		</div>
+@if (showSuccessMessage)
+{
+    <div class="alert alert-success mt-3">
+        Category created successfully!
+    </div>
+}
 
-		<button class="btn btn-success" @onclick="CreateCategory">Save</button>
-		<button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
-	</div>
-</div>
+<EditForm Model="category" OnValidSubmit="CreateCategory">
+    <DataAnnotationsValidator />
+
+    <div class="card w-25">
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label">Category Name</label>
+                <InputText class="form-control" @bind-Value="category.Name" />
+                <ValidationMessage For="() => category.Name" />
+            </div>
+
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-secondary" type="button" @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+</EditForm>
+
+
 
 @code {
-	private CategoryRequestModel category = new();
+    private CategoryRequestModel category = new();
+    private bool showSuccessMessage = false;
 
-	private async Task CreateCategory()
-	{
-		if (!string.IsNullOrWhiteSpace(category.Name))
-		{
-			try
-			{
-				var result = await CategoryService.CreateCategory(category);
-				if (result)
-				{
-					Navigation.NavigateTo("/category");
-				}
-				else
-				{
-					Console.WriteLine("Error creating category");
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"Exception: {ex.Message}");
-			}
-		}
-	}
+    private async Task CreateCategory()
+    {
+        try
+        {
+            var result = await CategoryService.CreateCategory(category);
+            if (result)
+            {
+                showSuccessMessage = true;
+                StateHasChanged();
+                await Task.Delay(1000);
+                Navigation.NavigateTo("/category");
+            }
+            else
+            {
+                Console.WriteLine("Error creating category");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception: {ex.Message}");
+        }
+    }
 
-	private void Cancel()
-	{
-		Navigation.NavigateTo("/category");
-	}
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/category");
+    }
 }

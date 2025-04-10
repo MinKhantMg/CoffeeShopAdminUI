@@ -10,28 +10,41 @@
 
 <h3>Update Category</h3>
 
-@if (category == null)
+@if (category == null )
 {
 	<p>Loading...</p>
 }
 else
 {
-	<div class="card w-25">
-		<div class="card-body">
-			<div class="mb-3">
-				<label class="form-label">Category Name</label>
-				<input type="text" class="form-control" value="@category.Name" required />
-			</div>
-
-			<button class="btn btn-success" @onclick="UpdateCategory">Save</button>
-			<button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+	@if (showSuccessMessage)
+	{
+		<div class="alert alert-success mt-3">
+			Category updated successfully!
 		</div>
-	</div>
+	}
+
+	<EditForm Model="category" OnValidSubmit="UpdateCategory">
+    <DataAnnotationsValidator />
+
+    <div class="card w-25">
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label">Category Name</label>
+                <InputText class="form-control" @bind-Value="category.Name" />
+                <ValidationMessage For="@(() => category.Name)" />
+            </div>
+
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-secondary" type="button" @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+</EditForm>
 }
 
 @code {
 	[Parameter] public string Id { get; set; } 
-	private CategoryRequestModel category = new();
+	private CategoryRequestModel category ;
+	private bool showSuccessMessage = false;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -42,6 +55,9 @@ else
 			{
 				Console.WriteLine("Category not found.");
 				Navigation.NavigateTo("/category");
+			}
+			else{
+				StateHasChanged();
 			}
 		}
 		catch (Exception ex)
@@ -59,6 +75,9 @@ else
 				var result = await CategoryService.UpdateCategory(Id, category);
 				if (result)
 				{
+					showSuccessMessage = true;
+					StateHasChanged();
+					await Task.Delay(1000);
 					Navigation.NavigateTo("/category");
 				}
 				else

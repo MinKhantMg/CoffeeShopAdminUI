@@ -23,6 +23,13 @@ else if (product == null)
 }
 else
 {
+     @if (showSuccessMessage)
+    {
+        <div class="alert alert-success mt-3">
+            Product updated successfully!
+        </div>
+    }
+
     <EditForm Model="product" OnValidSubmit="UpdateProduct">
         <DataAnnotationsValidator />
         <div class="card w-25">
@@ -39,13 +46,13 @@ else
                             }
                         }
                     </InputSelect>
-                    <ValidationMessage For="@(() => product.SubCategoryId)" />
+                    <ValidationMessage For="() => product.SubCategoryId" />
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Product Name</label>
                     <InputText @bind-Value="product.Name" class="form-control" />
-                    <ValidationMessage For="@(() => product.Name)" />
+                    <ValidationMessage For="() => product.Name" />
                 </div>
 
                 <button type="submit" class="btn btn-success">Save</button>
@@ -60,12 +67,12 @@ else
     private ProductRequestModel product = new();
     private List<SubCategoryRequestModel> SubCategories = new();
     private bool isLoading = true;
+    private bool showSuccessMessage = false;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            // Load categories and subcategory in parallel
             var productTask = ProductService.GetProductById(Id);
             var subcategoryTask = SubCategoryService.GetSubCategories();
 
@@ -76,7 +83,6 @@ else
 
             if (product == null)
             {
-               // Console.WriteLine($"SubCategory with ID {Id} not found.");
                 Navigation.NavigateTo("/product");
                 return;
             }
@@ -96,18 +102,19 @@ else
             var result = await ProductService.UpdateProduct(Id, product);
             if (result)
             {
+                showSuccessMessage = true;
+                StateHasChanged();
+                await Task.Delay(1000);
                 Navigation.NavigateTo("/product");
             }
             else
             {
                 Console.WriteLine("Error updating product");
-                // Consider showing an error message to the user
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Exception: {ex.Message}");
-            // Consider showing an error message to the user
         }
     }
 
