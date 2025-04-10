@@ -29,7 +29,7 @@
             @foreach (var item in pagedCategories)
             {
                 <tr class="table-row">
-                    <td>
+                    <td style="width : 150px">
                         <NavLink href="@($"/category/update/{item.Id}")" class="btn btn-primary">Edit</NavLink>
                         <NavLink href="@($"/category/delete/{item.Id}")" class="btn btn-danger">Delete</NavLink>
                     </td>

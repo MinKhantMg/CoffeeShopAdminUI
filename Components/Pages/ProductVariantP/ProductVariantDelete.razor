@@ -1,0 +1,96 @@
+﻿@page "/productvariant/delete/{Id}"
+
+@using Microsoft.AspNetCore.Authorization
+@using CoffeeShopAdmin.Models.ProductVariantM
+
+@inject CoffeeShopAdmin.Services.ProductVariantS.IProductVariantService ProductVariantService
+@inject NavigationManager Navigation
+
+@attribute [Authorize]
+
+<h3>Delete ProductVariant</h3>
+
+@if (isLoading)
+{
+    <p>Loading...</p>
+}
+else if (productvariant == null)
+{
+    <p>ProductVariant not found.</p>
+}
+else
+{
+    @if (showSuccessMessage)
+    {
+        <div class="alert alert-success mt-3">
+            ProductVariant deleted successfully!
+        </div>
+    }
+
+    <div class="card w-25">
+        <div class="card-body">
+            <div class="mb-3">
+                <p>Are you sure you want to delete @productvariant.Name?</p>
+            </div>
+
+            <button class="btn btn-danger" @onclick="DeleteProductVariant">Delete</button>
+            <button class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public string Id { get; set; }
+    private ProductVariantRequestModel? productvariant;
+    private bool isLoading = true;
+    private bool showSuccessMessage = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            productvariant = await ProductVariantService.GetProducVariantById(Id);
+
+            if (productvariant == null)
+            {
+                Console.WriteLine($"Product with ID {Id} not found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching productvariant: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task DeleteProductVariant()
+    {
+        try
+        {
+            var result = await ProductVariantService.DeleteProductVariant(Id);
+            if (result)
+            {
+                showSuccessMessage = true;
+                StateHasChanged();
+                await Task.Delay(1000);
+                Navigation.NavigateTo("/productvariant");
+            }
+            else
+            {
+                Console.WriteLine("Error deleting productvariant");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Exception: {ex.Message}");
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/productvariant");
+    }
+}

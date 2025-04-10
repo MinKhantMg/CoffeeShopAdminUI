@@ -9,7 +9,7 @@ namespace CoffeeShopAdmin.Models.SubCategoryM
         [Required(ErrorMessage = "SubCategory name is required.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Category name is required.")]
+        [Required(ErrorMessage = "Select Category is required.")]
         public string CategoryId { get; set; }
 
 

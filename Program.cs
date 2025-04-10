@@ -9,8 +9,8 @@ using System.Text;
 using Blazored.LocalStorage;
 using CoffeeShopAdmin.Services.UserS;
 using CoffeeShopAdmin.Services.SubCategoryS;
-using CoffeeShopAdmin.Services.TableS;
 using CoffeeShopAdmin.Services.ProductS;
+using CoffeeShopAdmin.Services.ProductVariantS;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,11 +42,11 @@ builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>
 
 builder.Services.AddOutputCache();
 
-builder.Services.AddScoped<ITableService, TableService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IProductVariantService, ProductVariantService>();
 
 builder.Services.AddCascadingAuthenticationState();
 

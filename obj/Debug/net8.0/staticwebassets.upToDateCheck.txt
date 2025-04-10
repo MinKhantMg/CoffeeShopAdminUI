@@ -2,3 +2,5 @@ wwwroot\app.css
 wwwroot\bootstrap\bootstrap.min.css
 wwwroot\bootstrap\bootstrap.min.css.map
 wwwroot\favicon.png
+wwwroot\uploads\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png
+wwwroot\uploads\coffeeshop.drawio.png

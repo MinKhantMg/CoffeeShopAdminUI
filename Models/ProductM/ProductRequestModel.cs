@@ -9,9 +9,8 @@ namespace CoffeeShopAdmin.Models.ProductM
         [Required(ErrorMessage = "Product name is required.")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "SubCategory name is required.")]
+        [Required(ErrorMessage = "Select SubCategory is required.")]
         public string SubCategoryId { get; set; }
-
 
         public string CreatedBy { get; set; }
         public DateTime? CreatedOn { get; set; }

@@ -79,6 +79,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0UFxQcm9kdWN0VXBkYXRlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/ProductVariantP/ProductVariantCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0VmFyaWFudFBcUHJvZHVjdFZhcmlhbnRDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/ProductVariantP/ProductVariantDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0VmFyaWFudFBcUHJvZHVjdFZhcmlhbnREZWxldGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/ProductVariantP/ProductVariantList.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0VmFyaWFudFBcUHJvZHVjdFZhcmlhbnRMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/ProductVariantP/ProductVariantUpdate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9kdWN0VmFyaWFudFBcUHJvZHVjdFZhcmlhbnRVcGRhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/Register.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWdpc3Rlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -97,22 +113,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/SubCategoryP/SubCategoryUpdate.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xTdWJDYXRlZ29yeVBcU3ViQ2F0ZWdvcnlVcGRhdGUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/TableP/TableCreate.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYWJsZVBcVGFibGVDcmVhdGUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/TableP/TableDelete.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYWJsZVBcVGFibGVEZWxldGUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/TableP/TableList.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYWJsZVBcVGFibGVMaXN0LnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/TableP/TableUpdate.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYWJsZVBcVGFibGVVcGRhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/PC/Desktop/Cafe/CoffeeShopAdminUI/CoffeeShopAdmin/Components/Pages/Weather.razor]

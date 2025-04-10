@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "54wi7GNuGzDwcTZq1S6LpdluxBAxG3BHJAqTdVdYUts=",
+  "Hash": "u3Iv1WkjLqmE7zkebxsYx1JSYk3doJFSiSRZKFm2fQw=",
   "Source": "CoffeeShopAdmin",
   "BasePath": "_content/CoffeeShopAdmin",
   "Mode": "Default",
@@ -183,6 +183,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png",
+      "SourceId": "CoffeeShopAdmin",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\",
+      "BasePath": "_content/CoffeeShopAdmin",
+      "RelativePath": "uploads/3766110d-5fd8-48aa-b9a4-9b1e27ac9724#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6rvssz7rko",
+      "Integrity": "wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\coffeeshop.drawio.png",
+      "SourceId": "CoffeeShopAdmin",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\",
+      "BasePath": "_content/CoffeeShopAdmin",
+      "RelativePath": "uploads/coffeeshop.drawio#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6rvssz7rko",
+      "Integrity": "wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\coffeeshop.drawio.png"
     }
   ],
   "Endpoints": [
@@ -619,7 +661,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 10 Apr 2025 15:28:34 GMT"
+          "Value": "Thu, 10 Apr 2025 18:05:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -656,7 +698,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 10 Apr 2025 15:28:34 GMT"
+          "Value": "Thu, 10 Apr 2025 18:05:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -701,7 +743,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 10 Apr 2025 15:28:34 GMT"
+          "Value": "Thu, 10 Apr 2025 18:05:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -746,7 +788,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 10 Apr 2025 15:28:34 GMT"
+          "Value": "Thu, 10 Apr 2025 18:05:21 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -839,6 +881,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/3766110d-5fd8-48aa-b9a4-9b1e27ac9724.6rvssz7rko.png",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "109219"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 18:22:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6rvssz7rko"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "109219"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 18:22:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/coffeeshop.drawio.6rvssz7rko.png",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\coffeeshop.drawio.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "109219"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 18:45:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6rvssz7rko"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/coffeeshop.drawio.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/coffeeshop.drawio.png",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\coffeeshop.drawio.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "109219"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 10 Apr 2025 18:45:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI="
         }
       ]
     }
