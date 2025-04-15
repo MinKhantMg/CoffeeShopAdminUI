@@ -14,7 +14,11 @@
 <hr />
 <NavLink href="/productvariant/create" class="btn btn-success mb-4">New</NavLink>
 
-@if (productvariants is not null)
+@if (productvariants == null || productvariants.Count == 0)
+{
+	<p>No product variants found.</p>
+}
+else 
 {
 	<table class="table table-bordered">
 		<thead class="table-dark">
@@ -95,15 +99,22 @@
 
 	private async Task LoadCategories()
 	{
-		productvariants = await ProductVariantService.GetProductVariants();
+		try
+		{
+			productvariants = await ProductVariantService.GetProductVariants();
 
-		// Fetch all categories
-		var products = await ProductService.GetProducts();
+			var products = await ProductService.GetProducts();
 
-		// Populate dictionary for quick lookup, using string keys
-		productNames = products.ToDictionary(c => c.Id, c => c.Name);
+			productNames = products
+				.Where(p => !string.IsNullOrEmpty(p.Id))
+				.ToDictionary(c => c.Id, c => c.Name);
 
-		UpdatePagedProductVariants();
+			UpdatePagedProductVariants();
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine($"[ERROR] Failed to load data: {ex.Message}");
+		}
 	}
 
 	private void UpdatePagedProductVariants()
@@ -116,6 +127,8 @@
 
 	private string GetProductName(string productId) // Accepts string now
 	{
+		if (string.IsNullOrWhiteSpace(productId)) return "Unknown";
+
 		return productNames.TryGetValue(productId, out var name) ? name : "Unknown";
 	}
 

@@ -90,41 +90,5 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.png'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png'))">
-      <SourceType>Package</SourceType>
-      <SourceId>CoffeeShopAdmin</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/CoffeeShopAdmin</BasePath>
-      <RelativePath>uploads/3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>6rvssz7rko</Fingerprint>
-      <Integrity>wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png'))</OriginalItemSpec>
-    </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\coffeeshop.drawio.png'))">
-      <SourceType>Package</SourceType>
-      <SourceId>CoffeeShopAdmin</SourceId>
-      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
-      <BasePath>_content/CoffeeShopAdmin</BasePath>
-      <RelativePath>uploads/coffeeshop.drawio.png</RelativePath>
-      <AssetKind>All</AssetKind>
-      <AssetMode>All</AssetMode>
-      <AssetRole>Primary</AssetRole>
-      <RelatedAsset></RelatedAsset>
-      <AssetTraitName></AssetTraitName>
-      <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>6rvssz7rko</Fingerprint>
-      <Integrity>wscEkPYkxoBU89DrFm3jPyV2yDRb5N08ao7Oa46wUSI=</Integrity>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\uploads\coffeeshop.drawio.png'))</OriginalItemSpec>
-    </StaticWebAsset>
   </ItemGroup>
 </Project>

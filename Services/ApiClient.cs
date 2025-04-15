@@ -136,23 +136,24 @@ namespace CoffeeShopAdmin.Services
 
         public async Task<T> GetFromJsonAsync<T>(string path)
         {
-            var sessionState = await _localStorageService.GetItemAsync<LoginResponseModel>("sessionState");
-            if (sessionState == null || string.IsNullOrWhiteSpace(sessionState.AccessToken))
+            await SetAuthorizeHeader();
+
+            var res = await _httpClient.GetAsync(path);
+
+            if (!res.IsSuccessStatusCode)
             {
-                Console.WriteLine("[ERROR] Token missing, redirecting to login.");
-                _navigationManager.NavigateTo("/login");
+                Console.WriteLine($"[ERROR] API returned {res.StatusCode} for {path}");
+                if (res.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    Console.WriteLine("[ERROR] Unauthorized - redirecting to login.");
+                    await ((CustomAuthStateProvider)_authStateProvider).MarkUserAsLoggedOut();
+                    _navigationManager.NavigateTo("/login");
+                }
                 return default;
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Get, path);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", sessionState.AccessToken);
-
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadFromJsonAsync<T>();
+            return await res.Content.ReadFromJsonAsync<T>();
         }
-
 
         public async Task<T> GetByIdAsync<T>(string path, string id)
         {

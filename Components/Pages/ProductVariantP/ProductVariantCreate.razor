@@ -7,7 +7,7 @@
 @inject CoffeeShopAdmin.Services.ProductS.IProductService ProductService
 @inject CoffeeShopAdmin.Services.ProductVariantS.IProductVariantService ProductVariantService
 @inject NavigationManager Navigation
-@inject IWebHostEnvironment WebHostEnvironment
+@inject HttpClient Http
 
 @attribute [Authorize]
 
@@ -50,7 +50,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Price</label>
-                <InputNumber class="form-control" @bind-Value="productvariant.Price" min="0" step="0.01" @oninput="PreventNegativePrice" />
+                <InputNumber class="form-control" @bind-Value="productvariant.Price" min="0" step="1" @oninput="PreventNegativePrice" />
                 <ValidationMessage For="() => productvariant.Price" />
             </div>
 
@@ -86,26 +86,24 @@
     private async Task HandleFileSelected(InputFileChangeEventArgs e)
     {
         var file = e.File;
-        var fileName = Path.GetFileName(file.Name); // Keep original name like "latte.png"
-        var uploadsFolder = Path.Combine(WebHostEnvironment.WebRootPath, "uploads");
 
-        // Ensure the uploads directory exists
-        Directory.CreateDirectory(uploadsFolder);
+        var content = new MultipartFormDataContent();
+        var stream = file.OpenReadStream();
+        var fileContent = new StreamContent(stream);
+        content.Add(fileContent, "file", file.Name);
 
-        var savePath = Path.Combine(uploadsFolder, fileName);
+        var response = await Http.PostAsync("https://localhost:7035/upload/image", content);
 
-        // Save the file (overwrite if exists)
-        using var fs = new FileStream(savePath, FileMode.Create);
-        await file.OpenReadStream().CopyToAsync(fs);
-
-        // Save just the filename in the model
-        productvariant.ImageUrl = fileName;
-
+        if (response.IsSuccessStatusCode)
+        {
+            var result = await response.Content.ReadFromJsonAsync<UploadResult>();
+            productvariant.ImageUrl = result.imageUrl;
+        }
     }
 
     private void PreventNegativePrice(ChangeEventArgs e)
     {
-        if (decimal.TryParse(e.Value?.ToString(), out var price))
+        if (int.TryParse(e.Value?.ToString(), out var price))
         {
             productvariant.Price = price < 0 ? 0 : price;
         }

@@ -21,14 +21,6 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png",
-      "PackagePath": "staticwebassets\\uploads\\3766110d-5fd8-48aa-b9a4-9b1e27ac9724.png"
-    },
-    {
-      "Id": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\coffeeshop.drawio.png",
-      "PackagePath": "staticwebassets\\uploads\\coffeeshop.drawio.png"
-    },
-    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CoffeeShopAdmin.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
     },
