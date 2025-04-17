@@ -1,0 +1,81 @@
+﻿@page "/order"
+@using CoffeeShopAdmin.Models.OrderM
+
+@inject CoffeeShopAdmin.Services.OrderS.IOrderService orderService
+@inject IJSRuntime JS
+
+<h3>Orders</h3>
+
+@if (orders == null)
+{
+    <p>Loading...</p>
+}
+else if (!orders.Any())
+{
+    <p>No pending orders found.</p>
+}
+else
+{
+    <table class="table table-bordered mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Order ID</th>
+                <th>Created On</th>
+                <th>Order Type</th>
+                <th>Payment Type</th>
+                <th>Total</th>
+                <th>Status</th>
+ 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orders)
+            {
+                <tr>
+                    <td>
+                        @if (order.OrderStatus != "Confirmed") // Only show the button if the order is not confirmed yet
+                        {
+                            <button class="btn btn-success" @onclick="() => ConfirmOrder(order.Id)">Confirm</button>
+                        }
+                    </td>
+                    <td>@order.Id</td>
+                    <td>@order.CreatedOn.ToLocalTime().ToString("dd/MM/yyyy")</td>
+                    <td>@order.OrderType</td>
+                    <td>@order.PaymentType</td>
+                    <td>@order.TotalAmount</td>
+                    <td>@order.OrderStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<OrderModel> orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadOrders();
+    }
+
+    private async Task LoadOrders()
+    {
+        orders = await orderService.GetPendingOrdersAsync();
+    }
+
+    private async Task ConfirmOrder(string orderId)
+    {
+        var response = await orderService.ConfirmOrderAsync(orderId);
+
+        if (response != null )
+        {
+            await JS.InvokeVoidAsync("alert", "Order confirmed successfully.");
+            await LoadOrders(); // Reload orders to reflect the change
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("alert", response?.Message ?? "Failed to confirm the order.");
+        }
+    }
+}

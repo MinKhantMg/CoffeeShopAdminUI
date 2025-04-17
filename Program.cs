@@ -11,6 +11,7 @@ using CoffeeShopAdmin.Services.UserS;
 using CoffeeShopAdmin.Services.SubCategoryS;
 using CoffeeShopAdmin.Services.ProductS;
 using CoffeeShopAdmin.Services.ProductVariantS;
+using CoffeeShopAdmin.Services.OrderS;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductVariantService, ProductVariantService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddCascadingAuthenticationState();
 

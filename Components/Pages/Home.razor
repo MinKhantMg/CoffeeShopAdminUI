@@ -1,9 +1,12 @@
 ﻿@page "/"
 @using CoffeeShopAdmin.Models.CategoryM
+@using CoffeeShopAdmin.Models.OrderM
 @using Microsoft.AspNetCore.Authorization
 @using System.Security.Claims
 
 @inject CoffeeShopAdmin.Services.CategoryS.ICategoryService CategoryService
+@inject CoffeeShopAdmin.Services.OrderS.IOrderService orderService
+@inject NavigationManager Navigation
 
 <CascadingAuthenticationState>
     <AuthorizeView Roles="Admin">
@@ -17,7 +20,7 @@
         {
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card text-white bg-primary mb-3">
+                    <div class="card text-white bg-primary mb-3" @onclick=GotoCategory>
                         <div class="card-body">
                             <h5 class="card-title">Categories</h5>
                             <p class="card-text display-4">@summary.Categories</p>
@@ -26,7 +29,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="card text-white bg-success mb-3">
+                    <div class="card text-white bg-success mb-3" @onclick=GotoSubCategory>
                         <div class="card-body">
                             <h5 class="card-title">Subcategories</h5>
                             <p class="card-text display-4">@summary.Subcategories</p>
@@ -35,7 +38,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="card text-white bg-warning mb-3">
+                    <div class="card text-white bg-warning mb-3" @onclick=GotoProduct>
                         <div class="card-body">
                             <h5 class="card-title">Products</h5>
                             <p class="card-text display-4">@summary.Products</p>
@@ -44,7 +47,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="card text-white bg-secondary mb-3">
+                    <div class="card text-white bg-secondary mb-3" @onclick=GotoProductVariant>
                         <div class="card-body">
                             <h5 class="card-title">Product Variants</h5>
                             <p class="card-text display-4">@summary.ProductVariants</p>
@@ -54,21 +57,120 @@
             </div>
         }
 
+        <h2 class="my-3">Orders</h2>
+        <hr />
+
+        @if (orders == null)
+        {
+            <p>Loading...</p>
+        }
+        else if (!orders.Any())
+        {
+            <p>No pending orders found.</p>
+        }
+        else
+        {
+            @* <table class="table table-bordered mt-3"> *@
+            @*     <thead class="table-dark"> *@
+            @*         <tr> *@
+            @*             <th>Order ID</th> *@
+            @*             <th>Created On</th> *@
+            @*             <th>Order Type</th> *@
+            @*             <th>Payment Type</th> *@
+            @*             <th>Total</th> *@
+            @*             <th>Status</th> *@
+
+            @*         </tr> *@
+            @*     </thead> *@
+            @*     <tbody> *@
+            @*         @foreach (var order in orders) *@
+            @*         { *@
+            @*             <tr> *@
+            @*                 <td>@order.Id</td> *@
+            @*                 <td>@order.CreatedOn.ToLocalTime().ToString("dd/MM/yyyy")</td> *@
+            @*                 <td>@order.OrderType</td> *@
+            @*                 <td>@order.PaymentType</td> *@
+            @*                 <td>@order.TotalAmount</td> *@
+            @*                 <td>@order.OrderStatus</td> *@
+            @*             </tr> *@
+            @*         } *@
+            @*     </tbody> *@
+            @* </table> *@
+
+
+            <table class="table table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">Order Type</th>
+                        <th scope="col">Payment Type</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in pagedOrders)
+                    {
+                        <tr class="table-row">
+                            <td>@item.Id</td>
+                            <td>@item.CreatedOn.ToString("dd/MM/yyyy")</td>
+                            <td>@item.OrderType</td>
+                            <td>@item.PaymentType</td>
+                            <td>@item.TotalAmount</td>
+                            <td>@item.OrderStatus</td>
+                        </tr>
+                    }
+
+                    <!-- Fill empty rows if less than 5 items are present -->
+                    @for (int i = pagedOrders.Count; i < pageSize; i++)
+                    {
+                        <tr class="table-row">
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+            <div class="d-flex justify-content-between mt-2">
+                <button class="btn btn-secondary" @onclick="PrevPage" disabled="@(!HasPreviousPage)">Previous</button>
+                <span>Page @(pageNumber + 1) of @TotalPages</span>
+                <button class="btn btn-secondary" @onclick="NextPage" disabled="@(!HasNextPage)">Next</button>
+            </div>
+
+
+            <style>
+                .table-row {
+                    height: 50px;
+                }
+            </style>
+        }
+
     </AuthorizeView>
     <AuthorizeView Roles="Staff">
         <h3>Welcome, Staff Panel</h3>
 
 
     </AuthorizeView>
-    @* <AuthorizeView>  *@
-    @*     <NotAuthorized>  *@
-    @*         <h1>Welocome To Cafe de lax AdminDashboard</h1>  *@
-    @*     </NotAuthorized>  *@
-    @* </AuthorizeView>  *@
 </CascadingAuthenticationState>
 
 @code {
     private AdminSummaryModel summary;
+
+    private int pageSize = 9;
+    private int pageNumber = 0;
+    private List<OrderModel> orders = new();
+    private List<OrderModel> pagedOrders = new();
+
+    private int TotalPages => (int)Math.Ceiling((double)orders.Count / pageSize);
+    private bool HasPreviousPage => pageNumber > 0;
+    private bool HasNextPage => pageNumber < (TotalPages - 1);
 
     protected override async Task OnInitializedAsync()
     {
@@ -81,7 +183,53 @@
     {
         var categoryresponse = await CategoryService.GetSummary();
         summary = categoryresponse;
+        orders = await orderService.GetConfirmOrdersAsync();
+        UpdatePagedOrders();
+    }
 
-      
+    private void UpdatePagedOrders()
+    {
+        pagedOrders = orders
+            .Skip(pageNumber * pageSize)
+            .Take(pageSize)
+            .ToList();
+    }
+
+    private void NextPage()
+    {
+        if (HasNextPage)
+        {
+            pageNumber++;
+            UpdatePagedOrders();
+        }
+    }
+
+    private void PrevPage()
+    {
+        if (HasPreviousPage)
+        {
+            pageNumber--;
+            UpdatePagedOrders();
+        }
+    }
+
+    private void GotoCategory()
+    {
+        Navigation.NavigateTo("/category");
+    }
+
+     private void GotoSubCategory()
+    {
+        Navigation.NavigateTo("/subcategory");
+    }
+
+    private void GotoProduct()
+    {
+        Navigation.NavigateTo("/product");
+    }
+
+    private void GotoProductVariant()
+    {
+        Navigation.NavigateTo("/productvariant");
     }
 }
