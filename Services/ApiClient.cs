@@ -9,6 +9,7 @@ using CoffeeShopAdmin.Auth;
 using Blazored.LocalStorage;
 using CoffeeShopAdmin.Models.CategoryM;
 using CoffeeShopAdmin.Models;
+using System.Text.Json;
 
 namespace CoffeeShopAdmin.Services
 {
@@ -105,12 +106,10 @@ namespace CoffeeShopAdmin.Services
             return new ClaimsIdentity(claims, "jwt");
         }
 
-        public async Task<T1> PostAsync<T1, T2>(string path, T2 postModel)
+        public async Task<T1?> PostAsync<T1, T2>(string path, T2 postModel)
         {
-
             await SetAuthorizeHeader();
 
-      
             Console.WriteLine("[DEBUG] Sending request with headers:");
             foreach (var header in _httpClient.DefaultRequestHeaders)
             {
@@ -125,14 +124,36 @@ namespace CoffeeShopAdmin.Services
                 return default;
             }
 
+            var responseContent = await res.Content.ReadAsStringAsync();
+
             if (!res.IsSuccessStatusCode)
             {
                 Console.WriteLine($"[ERROR] API returned {res.StatusCode} for {path}");
-                return default;
+                Console.WriteLine($"[ERROR] Response content: {responseContent}");
+
+                try
+                {
+                    // Try to deserialize the error body to T1, assuming it has a Message property
+                    var errorObj = JsonSerializer.Deserialize<T1>(responseContent, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                    return errorObj;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[ERROR] Failed to parse error response: {ex.Message}");
+                    return default;
+                }
             }
 
-            return await res.Content.ReadFromJsonAsync<T1>();
+            return JsonSerializer.Deserialize<T1>(responseContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
         }
+
 
         public async Task<T> GetFromJsonAsync<T>(string path)
         {

@@ -20,6 +20,11 @@
 			<EditForm Model="loginModel" method="post" OnValidSubmit="HandleLogin" FormName="Login">
 				<DataAnnotationsValidator/>
 				<hr />
+				@if (!string.IsNullOrEmpty(errorMessage))
+				{
+					<div class="alert alert-danger mt-2">@errorMessage</div>
+				}
+
 				<div class="form-floating mb-3">
 					<InputText @bind-Value="loginModel.Email" class="form-control" aria-required="true" />
 					<label for="email" class="form-label">Email</label>
@@ -41,9 +46,12 @@
 @code {
 
 	private LoginRequestModel loginModel = new LoginRequestModel();
+	private string? errorMessage;
 
 	private async Task HandleLogin()
 	{
+		errorMessage = null;
+
 		var res = await apiClient.PostAsync<LoginResponseModel, LoginRequestModel>("/auth/login", loginModel);
 
 		if (res != null && !string.IsNullOrEmpty(res.RefreshToken))
@@ -59,7 +67,8 @@
 		}
 		else
 		{
-			Console.WriteLine($"Login failed: {res?.Message ?? "No response"}");
+			errorMessage = res?.Message ?? "Login failed. Please check your credentials.";
+			StateHasChanged();
 		}
 	}
 }

@@ -58,7 +58,7 @@
         }
 
         <h2 class="my-3">Orders</h2>
-        <hr />
+       
 
         @if (orders == null)
         {
@@ -70,34 +70,6 @@
         }
         else
         {
-            @* <table class="table table-bordered mt-3"> *@
-            @*     <thead class="table-dark"> *@
-            @*         <tr> *@
-            @*             <th>Order ID</th> *@
-            @*             <th>Created On</th> *@
-            @*             <th>Order Type</th> *@
-            @*             <th>Payment Type</th> *@
-            @*             <th>Total</th> *@
-            @*             <th>Status</th> *@
-
-            @*         </tr> *@
-            @*     </thead> *@
-            @*     <tbody> *@
-            @*         @foreach (var order in orders) *@
-            @*         { *@
-            @*             <tr> *@
-            @*                 <td>@order.Id</td> *@
-            @*                 <td>@order.CreatedOn.ToLocalTime().ToString("dd/MM/yyyy")</td> *@
-            @*                 <td>@order.OrderType</td> *@
-            @*                 <td>@order.PaymentType</td> *@
-            @*                 <td>@order.TotalAmount</td> *@
-            @*                 <td>@order.OrderStatus</td> *@
-            @*             </tr> *@
-            @*         } *@
-            @*     </tbody> *@
-            @* </table> *@
-
-
             <table class="table table-bordered">
                 <thead class="table-dark">
                     <tr>

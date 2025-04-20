@@ -12,28 +12,33 @@ namespace CoffeeShopAdmin.Services.UserS
             _apiClient = apiClient;
         }
 
-        public async Task<bool> RegisterUserAsync(RegisterRequestModel dto)
+        public async Task<string?> RegisterUserAsync(RegisterRequestModel dto)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(dto.Email))
                 {
-                    throw new ArgumentException("Email cannot be empty.", nameof(dto.Email));
+                    return "Email cannot be empty.";
                 }
 
-                // Hash the password before sending to the API
                 dto.Id = Guid.NewGuid().ToString().ToUpper();
 
-                var result = await _apiClient.PostAsync<ApiResponse, RegisterRequestModel>("/user/register", dto);
+                var result = await _apiClient.PostAsync<RegisterResponse, RegisterRequestModel>("/user/register", dto);
 
-                return result?.Result ?? false;
+                if (result?.Result == true)
+                {
+                    return null; // Success
+                }
+
+                return result?.Message ?? "Email is already in used.";
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error registering user: {ex.Message}");
-                return false;
+                return "An error occurred while registering. Please try again.";
             }
         }
+
     }
 }
 
