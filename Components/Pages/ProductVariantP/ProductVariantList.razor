@@ -26,6 +26,7 @@ else
 				<th scope="col">#</th>
 				<th scope="col">Product</th>
 				<th scope="col">Name</th>
+				<th scope="col">Calorie</th>
 				<th scope="col">Price</th>
 				<th scope="col">CreatedBy</th>
 				<th scope="col">CreatedOn</th>
@@ -43,6 +44,7 @@ else
 					</td>
 					<td>@GetProductName(item.ProductId)</td>
 					<td>@item.Name</td>
+					<td>@item.Calorie</td>
 					<td>@item.Price</td>
 					<td>@item.CreatedBy</td>
 					<td>@item.CreatedOn?.ToString("dd/MM/yyyy")</td>

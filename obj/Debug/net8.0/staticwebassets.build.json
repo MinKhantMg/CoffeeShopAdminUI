@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2TB4N9YSDPPi4SC83vsmU9lQkM9bTg+6zS+EMjX/LHU=",
+  "Hash": "JsmXf0eleqYeOvzX/rDu82y1WCjh+fj+MnS0hDY8Uhg=",
   "Source": "CoffeeShopAdmin",
   "BasePath": "_content/CoffeeShopAdmin",
   "Mode": "Default",
@@ -183,6 +183,69 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\camarel_latte.jpg",
+      "SourceId": "CoffeeShopAdmin",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\",
+      "BasePath": "_content/CoffeeShopAdmin",
+      "RelativePath": "uploads/camarel_latte#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4aayisljcp",
+      "Integrity": "jLpq9GgyXgoqJjaYhqPjjmYdLXd2LdcYDMK0DyL9CSg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\camarel_latte.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\SBX20190617_CaffeLatte.jpg",
+      "SourceId": "CoffeeShopAdmin",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\",
+      "BasePath": "_content/CoffeeShopAdmin",
+      "RelativePath": "uploads/SBX20190617_CaffeLatte#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jhiwhcuhku",
+      "Integrity": "l6Z8vJgKChcCgKc1euowb/QBMYUOkrnd6B3eDV7TFq4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\SBX20190617_CaffeLatte.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\Vanilla-Hazelnut-Latte.jpg",
+      "SourceId": "CoffeeShopAdmin",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\",
+      "BasePath": "_content/CoffeeShopAdmin",
+      "RelativePath": "uploads/Vanilla-Hazelnut-Latte#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "3bw5d6fcy4",
+      "Integrity": "MdjfWrypjEiKWK4wq/dsAXCoa/MSEAVsZ4EAthS/5dQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Vanilla-Hazelnut-Latte.jpg"
     }
   ],
   "Endpoints": [
@@ -839,6 +902,252 @@
         {
           "Name": "integrity",
           "Value": "sha256-4mWsDy3aHl36ZbGt8zByK7Pvd4kRUoNgTYzRnwmPHwg="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/camarel_latte.4aayisljcp.jpg",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\camarel_latte.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6449"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jLpq9GgyXgoqJjaYhqPjjmYdLXd2LdcYDMK0DyL9CSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 09:37:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4aayisljcp"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/camarel_latte.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jLpq9GgyXgoqJjaYhqPjjmYdLXd2LdcYDMK0DyL9CSg="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/camarel_latte.jpg",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\camarel_latte.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6449"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jLpq9GgyXgoqJjaYhqPjjmYdLXd2LdcYDMK0DyL9CSg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 09:37:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jLpq9GgyXgoqJjaYhqPjjmYdLXd2LdcYDMK0DyL9CSg="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/SBX20190617_CaffeLatte.jhiwhcuhku.jpg",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\SBX20190617_CaffeLatte.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19028"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"l6Z8vJgKChcCgKc1euowb/QBMYUOkrnd6B3eDV7TFq4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 07:35:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jhiwhcuhku"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/SBX20190617_CaffeLatte.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-l6Z8vJgKChcCgKc1euowb/QBMYUOkrnd6B3eDV7TFq4="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/SBX20190617_CaffeLatte.jpg",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\SBX20190617_CaffeLatte.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19028"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"l6Z8vJgKChcCgKc1euowb/QBMYUOkrnd6B3eDV7TFq4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 07:35:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-l6Z8vJgKChcCgKc1euowb/QBMYUOkrnd6B3eDV7TFq4="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/Vanilla-Hazelnut-Latte.3bw5d6fcy4.jpg",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\Vanilla-Hazelnut-Latte.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43122"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MdjfWrypjEiKWK4wq/dsAXCoa/MSEAVsZ4EAthS/5dQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 09:42:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3bw5d6fcy4"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/Vanilla-Hazelnut-Latte.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MdjfWrypjEiKWK4wq/dsAXCoa/MSEAVsZ4EAthS/5dQ="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/Vanilla-Hazelnut-Latte.jpg",
+      "AssetFile": "C:\\Users\\PC\\Desktop\\Cafe\\CoffeeShopAdminUI\\CoffeeShopAdmin\\wwwroot\\uploads\\Vanilla-Hazelnut-Latte.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43122"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MdjfWrypjEiKWK4wq/dsAXCoa/MSEAVsZ4EAthS/5dQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 09:42:42 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MdjfWrypjEiKWK4wq/dsAXCoa/MSEAVsZ4EAthS/5dQ="
         }
       ]
     }

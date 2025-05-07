@@ -2,3 +2,6 @@ wwwroot\app.css
 wwwroot\bootstrap\bootstrap.min.css
 wwwroot\bootstrap\bootstrap.min.css.map
 wwwroot\favicon.png
+wwwroot\uploads\camarel_latte.jpg
+wwwroot\uploads\SBX20190617_CaffeLatte.jpg
+wwwroot\uploads\Vanilla-Hazelnut-Latte.jpg

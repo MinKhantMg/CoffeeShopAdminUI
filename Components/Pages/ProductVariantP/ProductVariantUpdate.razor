@@ -56,6 +56,12 @@ else
                 </div>
 
                 <div class="mb-3">
+                    <label class="form-label">Calories</label>
+                    <InputNumber class="form-control" @bind-Value="productvariant.Calorie" min="0" step="1" @oninput="PreventNegativeCalorie" />
+                    <ValidationMessage For="() => productvariant.Calorie" />
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label">Description</label>
                     <InputTextArea class="form-control" @bind-Value="productvariant.Description" />
                     <ValidationMessage For="() => productvariant.Description" />
@@ -67,11 +73,11 @@ else
                     <ValidationMessage For="() => productvariant.Price" />
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Image</label>
-                    <InputFile OnChange="HandleFileSelected" />
-                    <ValidationMessage For="() => productvariant.ImageUrl" />
-                </div>
+                @* <div class="mb-3"> *@
+                @*     <label class="form-label">Image</label> *@
+                @*     <InputFile OnChange="HandleFileSelected" /> *@
+                @*     <ValidationMessage For="() => productvariant.ImageUrl" /> *@
+                @* </div> *@
 
                 <button type="submit" class="btn btn-success">Save</button>
                 <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
@@ -159,5 +165,13 @@ else
     private void Cancel()
     {
         Navigation.NavigateTo("/productvariant");
+    }
+
+    private void PreventNegativeCalorie(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var calorie))
+        {
+            productvariant.Calorie = calorie < 0 ? 0 : calorie;
+        }
     }
 }

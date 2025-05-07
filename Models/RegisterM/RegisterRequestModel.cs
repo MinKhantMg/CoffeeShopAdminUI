@@ -12,8 +12,8 @@ namespace CoffeeShopAdmin.Models.RegisterM
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        public string? PhoneNumber { get; set; } = default!;
-
+        [Required(ErrorMessage = "Phone Number is required")]
+        public string PhoneNumber { get; set; } = default!;
 
         [Required(ErrorMessage = "Email is required")]
         public string Email { get; set; } = default!;

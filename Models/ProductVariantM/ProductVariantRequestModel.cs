@@ -12,6 +12,10 @@ namespace CoffeeShopAdmin.Models.ProductVariantM
         [Required(ErrorMessage = "Image is required.")]
         public string ImageUrl { get; set; }
 
+        [Required(ErrorMessage = "Calories is required.")]
+        [Range(1, int.MaxValue, ErrorMessage = "Calories must be greater than 0.")]
+        public int? Calorie { get; set; }
+
         [Required(ErrorMessage = "Description is required.")]
         public string Description { get; set; }
 

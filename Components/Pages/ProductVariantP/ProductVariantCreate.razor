@@ -43,6 +43,12 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Calories</label>
+                <InputNumber class="form-control" @bind-Value="productvariant.Calorie" min="0" step="1" @oninput="PreventNegativeCalorie" />
+                <ValidationMessage For="() => productvariant.Calorie" />
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Description</label>
                 <InputTextArea class="form-control" @bind-Value="productvariant.Description" />
                 <ValidationMessage For="() => productvariant.Description" />
@@ -106,6 +112,14 @@
         if (int.TryParse(e.Value?.ToString(), out var price))
         {
             productvariant.Price = price < 0 ? 0 : price;
+        }
+    }
+
+    private void PreventNegativeCalorie(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out var calorie))
+        {
+            productvariant.Calorie = calorie < 0 ? 0 : calorie;
         }
     }
 

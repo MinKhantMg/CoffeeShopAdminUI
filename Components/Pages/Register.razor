@@ -63,7 +63,15 @@
 						}
 					</InputSelect>
 					<label class="form-label">Role</label>
-					<ValidationMessage For="() => registerModel.Role" class="text-danger" />
+
+					@*  @if (registerModel.Role == "None")  *@
+					@*  {  *@
+					@*  	<div class="text-danger">Please select a valid role.</div>  *@
+					@* }  *@
+					@*  else  *@
+					@*  {  *@
+					@*  	<ValidationMessage For="() => registerModel.Role" class="text-danger" />  *@
+					@*  }  *@
 				</div>
 				<div>
 					<button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
@@ -88,7 +96,8 @@
 		if (string.IsNullOrEmpty(result))
 		{
 			showSuccessMessage = true;
-			await Task.Delay(1000);
+			StateHasChanged();
+			await Task.Delay(2000);
 			Navigation.NavigateTo("/login");
 		}
 		else
